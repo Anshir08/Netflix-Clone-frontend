@@ -7,6 +7,7 @@ import Player from "./pages/Player";
 import SignUp from "./pages/SignUp";
 import TVShows from "./pages/TVShows";
 import UserListedMovies from "./pages/UserListedMovies";
+import { Footer } from "./pages/Footer";
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
         <Route exact path="/mylist" element={<UserListedMovies />} />
         <Route exact path="/" element={<Netflix />} />
       </Routes>
+        <Footer />
     </BrowserRouter>
   );
 }

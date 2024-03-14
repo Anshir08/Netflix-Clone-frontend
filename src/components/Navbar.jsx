@@ -5,10 +5,13 @@ import styled from "styled-components";
 import logo from "../assets/logo.png";
 import { firebaseAuth } from "../utils/firebase-config";
 import { FaPowerOff, FaSearch } from "react-icons/fa";
+import { FaAlignJustify } from "react-icons/fa";
 
 export default function Navbar({ isScrolled }) {
   const [showSearch, setShowSearch] = useState(false);
   const [inputHover, setInputHover] = useState(false);
+  const [sidebar, setSidebar] = useState(false);
+
   const links = [
     { name: "Home", link: "/" },
     { name: "TV Shows", link: "/tv" },
@@ -18,12 +21,16 @@ export default function Navbar({ isScrolled }) {
 
   return (
     <Container>
-      <nav className={`${isScrolled ? "scrolled" : ""} flex`}>
+      <nav className={`${isScrolled || sidebar ? "scrolled" : ""} flex`}>
         <div className="left flex a-center">
+          <button className="sidebar-toggler" onClick={() => setSidebar(!sidebar)}>
+            <FaAlignJustify />
+          </button>
+          
           <div className="brand flex a-center j-center">
             <img src={logo} alt="Logo" />
           </div>
-          <ul className="links flex">
+          <ul className={`links flex ${sidebar ? "" : "display"}`}>
             {links.map(({ name, link }) => {
               return (
                 <li key={name}>
@@ -81,6 +88,9 @@ const Container = styled.div`
     padding: 0 4rem;
     align-items: center;
     transition: 0.3s ease-in-out;
+    .sidebar-toggler {
+      display:none;
+    }
     .left {
       gap: 2rem;
       .brand {
@@ -153,6 +163,35 @@ const Container = styled.div`
           visibility: visible;
           padding: 0.3rem;
         }
+      }
+    }
+  }
+  @media screen and (max-width: 700px) {
+    nav {
+      padding: 0 1.5rem;
+      .left {
+        gap:1rem;
+        .brand {
+          img {
+            height: 3rem
+          }
+        }
+      }
+      .sidebar-toggler {
+        display:block;
+      }
+      .display{
+        display:none;
+      }
+      .links {
+        flex-direction: column;
+        background-color: black;
+        position: absolute;
+        top:5rem;
+        left:0;
+        width:40vw;
+        height:100vh;
+        padding:4rem 2rem;
       }
     }
   }

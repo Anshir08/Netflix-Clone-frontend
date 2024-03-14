@@ -14,7 +14,7 @@ export default React.memo(function CardSlider({data, title}) {
       listRef.current.style.transform = `translateX(${270 + distance}px)`;
       setSliderPosition(sliderPosition - 1);
     }
-    if (direction === "right" && sliderPosition < 4) {
+    if (direction === "right" && sliderPosition < 5) {
       listRef.current.style.transform = `translateX(${-230 + distance}px)`;
       setSliderPosition(sliderPosition + 1);
     }

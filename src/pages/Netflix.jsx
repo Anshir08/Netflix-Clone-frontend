@@ -24,13 +24,13 @@ function Netflix() {
 
   useEffect(() => {
     dispatch(getGenres());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (genresLoaded) {
       dispatch(fetchMovies({ genres, type: "all" }));
     }
-  }, [genresLoaded]);
+  }, [genresLoaded, dispatch, genres]);
 
   onAuthStateChanged(firebaseAuth, (currentUser) => {
     if (!currentUser) navigate("/login");
@@ -114,6 +114,26 @@ const Container = styled.div`
               font-size: 1.8rem;
             }
           }
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 600px) {
+    .hero {
+      img {
+        height: 60vh;
+        width: 100vw;
+      }
+      .container {
+        .logo {
+          img {
+            width: 80%;
+            margin:2rem;
+            padding: 0;
+          }
+        }
+        .buttons {
+          margin:2rem;
         }
       }
     }
